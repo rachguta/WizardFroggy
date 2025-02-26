@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Book : MonoBehaviour
 {
-    public float interactRadius = 2f; // Радиус взаимодействия
+    public float interactRadius = 1.5f; // Радиус взаимодействия
     private PlayerController player; // Ссылка на игрока
     [SerializeField] bool isFirstBook;
     [SerializeField] bool isSecondBook;
