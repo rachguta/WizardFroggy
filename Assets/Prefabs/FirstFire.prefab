@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8927931878402134851}
   - component: {fileID: 672547435294336079}
   - component: {fileID: 5268332475690669657}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FirstFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}

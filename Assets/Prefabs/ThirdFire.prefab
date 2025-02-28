@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThirdFire
       objectReference: {fileID: 0}
+    - target: {fileID: 1560137103265696934, guid: 474c0e3b76b6ad8419a91acf66f7f53c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2486407380646944087, guid: 474c0e3b76b6ad8419a91acf66f7f53c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

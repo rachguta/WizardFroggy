@@ -12,11 +12,13 @@ public class FireZoneManager : MonoBehaviour
 
     public void StartMyCoroutine()
     {
+        Debug.Log("Действие работает");
         StartCoroutine(FireSequence());
     }
 
     private IEnumerator FireSequence()
     {
+        Debug.Log("Корутина запустилась");
         while (currentStage < fireStages.Length)
         {
             // Удаляем предыдущий Tilemap (если есть)

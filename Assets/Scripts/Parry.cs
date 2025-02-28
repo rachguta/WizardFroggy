@@ -9,7 +9,7 @@ public class Parry : MonoBehaviour
     public Animator animator;
     private const string PARRY = "Parry";
     private bool isParrying = false;
-    [SerializeField] private bool canParry;
+    public bool canParry;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.L) && !isParrying && canParry)

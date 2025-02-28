@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent OnBossStage2;    // Событие начала исследования мира
     public UnityEvent OnLearnAbilities2;
     public UnityEvent OnBossStage3;
-
+    public UnityEvent OnLearnAbilities3;
 
 
     void Start()
@@ -36,11 +36,11 @@ public class GameManager : MonoBehaviour
     {
         //Этап 1: Первая стадия босса
         SetGameState(GameState.BossStage1);
-        yield return new WaitForSeconds(21); // Ждём 10 секунд (или другую логику завершения)
+        yield return new WaitForSeconds(21);
 
         // Этап 2: Обучение способностям
         SetGameState(GameState.LearnAbilities1);
-        yield return new WaitForSeconds(10); // Ждём 15 секунд
+        yield return new WaitForSeconds(10); 
 
         // Этап 3: Вторая стадия
         SetGameState(GameState.BossStage2);
@@ -48,11 +48,38 @@ public class GameManager : MonoBehaviour
 
         SetGameState(GameState.LearnAbilities2);
         yield return new WaitForSeconds(10); 
-        // Исследование продолжается
         SetGameState(GameState.BossStage3);
-        
+        yield return new WaitForSeconds(11);
+        // Исследование продолжается
+        SetGameState(GameState.LearnAbilities3);
+        yield return new WaitForSeconds(5);
+        Debug.Log("Основной этап игры");
+
+        SetGameState(GameState.BossStage3);
+        // Основной игровой процесс: рандомное комбинирование 2 стадий
+        //StartCoroutine(BossBattleLoop());
 
     }
+    private IEnumerator BossBattleLoop()
+    {
+        GameState[] bossStages = { GameState.BossStage1, GameState.BossStage2, GameState.BossStage3 };
+
+        while (true) //  Зацикленный игровой процесс
+        {
+            // Выбираем две случайные стадии
+            GameState firstStage = bossStages[Random.Range(0, bossStages.Length)];
+            GameState secondStage;
+            do
+            {
+                secondStage = bossStages[Random.Range(0, bossStages.Length)];
+            }
+            while (secondStage == firstStage); // Убеждаемся, что выбраны две разные стадии
+            SetGameState(firstStage);
+            SetGameState(secondStage);
+            yield return new WaitForSeconds(15);
+        }
+    }
+
 
     private void SetGameState(GameState newState)
     {
@@ -77,6 +104,9 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.LearnAbilities2:
                 OnLearnAbilities2?.Invoke();
+                break;
+            case GameState.LearnAbilities3:
+                OnLearnAbilities3?.Invoke();
                 break;
         }
     }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1937926384048906322}
   - component: {fileID: 5144415739337467670}
   - component: {fileID: -8059483351367914313}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SecondFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}

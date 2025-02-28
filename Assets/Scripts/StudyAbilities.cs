@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class StudyAbilities : MonoBehaviour
 {
-    public GameObject book1Prefab;
+    public GameObject bookPrefab;
     [SerializeField] private bool isRightBookcase;
     [SerializeField] private bool isLeftBookcase;
+    [SerializeField] private bool isLowBookcase;
     public void InitiateBook1()
     {
 
         if (isLeftBookcase)
         {
 
-            GameObject book1 = Instantiate(book1Prefab, (Vector2)transform.position + Vector2.right * 3, Quaternion.identity);
+            GameObject book1 = Instantiate(bookPrefab, (Vector2)transform.position + Vector2.right * 3, Quaternion.identity);
         }
         else if(isRightBookcase)
         {
-            GameObject book1 = Instantiate(book1Prefab, (Vector2)transform.position + Vector2.left * 3, Quaternion.identity);
+            GameObject book1 = Instantiate(bookPrefab, (Vector2)transform.position + Vector2.left * 3, Quaternion.identity);
+        }
+        else if(isLowBookcase)
+        {
+            GameObject book1 = Instantiate(bookPrefab, (Vector2)transform.position + Vector2.up * 3, Quaternion.identity);
         }
     }
 }
