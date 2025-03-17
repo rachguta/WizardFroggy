@@ -6,9 +6,9 @@ public class Projectile : MonoBehaviour
 {
     Rigidbody2D rigidbody2d;
     [SerializeField] private bool isEnemyProjectile;
-    private float projectileDamage = 7f;
+    [SerializeField] private float enemyProjectileDamage = 7f;
+    [SerializeField] private float frogProjectileDamage = 1f;
     private bool isReflected = false;
-    // Awake is called when the Projectile GameObject is instantiated
     void Awake()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -27,11 +27,21 @@ public class Projectile : MonoBehaviour
             PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(projectileDamage);
+                playerHealth.TakeDamage(enemyProjectileDamage);
             }
         }
-        Destroy(gameObject);
+        if (other.CompareTag("Enemy") && !isEnemyProjectile)
+        {
+            EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(frogProjectileDamage);
+            }
+            Debug.Log(enemyHealth.health);
 
+        }
+        Destroy(gameObject);
+        
     }
     public void Reflect()
     {

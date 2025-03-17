@@ -5,14 +5,13 @@ using UnityEngine;
 
 public class Book : MonoBehaviour
 {
-    public float interactRadius = 1.5f; // Радиус взаимодействия
-    private PlayerController player; // Ссылка на игрока
+    public float interactRadius = 1.5f; 
+    private PlayerController player; 
     [SerializeField] bool isFirstBook;
     [SerializeField] bool isSecondBook;
     [SerializeField] bool isThirdBook;
     private void Update()
     {
-        // Проверяем, есть ли игрок в радиусе
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, interactRadius);
         foreach (Collider2D collider in colliders)
         {
@@ -53,11 +52,10 @@ public class Book : MonoBehaviour
 
             }
 
-            Destroy(gameObject); // Удаляем книгу после использования
+            Destroy(gameObject); 
         }
     }
     
-    // Показываем радиус в редакторе
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;

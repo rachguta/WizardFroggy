@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     //Fire
     private float damageByFire = 3f;
     Vector2 moveDirection = new Vector2(0, 1);
-    public int health { get { return currentHealth; } }
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -40,17 +40,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Handle movement input
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        // Handle dash input
         if (Input.GetKeyDown(KeyCode.Space) && canDash)
         {
             StartCoroutine(Dash());
         }
 
-        // Update invincibility timer
         if (isInvincible)
         {
             invincibleTimer -= Time.deltaTime;
@@ -60,17 +57,15 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // Projectile Launch
         if (Input.GetKeyDown(KeyCode.C) && canShoot && !isDashing)
         {
             Launch();
         }
 
-        //Взаимодействие с книгой
-        if(Input.GetKeyDown(KeyCode.X))
-        {
-            FindBook();
-        }
+        //if(Input.GetKeyDown(KeyCode.X))
+        //{
+        //    FindBook();
+        //}
 
     }
 
@@ -95,22 +90,19 @@ public class PlayerController : MonoBehaviour
         Vector2 startPosition = rb.position;
         Vector2 targetPosition = startPosition + dashDirection * dashDistance;
 
-        // Укажите слой для проверки (все кроме слоя игрока)
-        int layerMask = ~LayerMask.GetMask("Player"); // Инвертируем слой Player, чтобы его игнорировать
+        int layerMask = ~LayerMask.GetMask("Player");
 
-        // Проверка препятствий на пути с помощью Raycast
         RaycastHit2D hit = Physics2D.Raycast(startPosition, dashDirection, dashDistance, layerMask);
 
-        // Визуализация луча для отладки
         Debug.DrawLine(startPosition, targetPosition, Color.red, 1.0f);
 
         if (hit.collider != null)
         {
-            targetPosition = hit.point - dashDirection * 0.1f; // Отступ, чтобы избежать "залипания" в препятствии
+            targetPosition = hit.point - dashDirection * 0.1f; 
             Debug.Log("Obstacle detected: " + hit.collider.name);
         }
 
-        float dashTime = 0.2f; // Длительность дэша
+        float dashTime = 0.2f; 
         float elapsedTime = 0f;
 
         while (elapsedTime < dashTime)
@@ -123,49 +115,44 @@ public class PlayerController : MonoBehaviour
         rb.position = targetPosition;
         isDashing = false;
 
-        // Ожидание кулдауна
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
 
+    //НЕ АКТУАЛЬНО
+    //public void ChangeHealth(int amount)
+    //{
+    //    if (amount < 0)
+    //    {
+    //        if (isInvincible)
+    //            return;
 
-    public void ChangeHealth(int amount)
-    {
+    //        isInvincible = true;
+    //        invincibleTimer = timeInvincible;
+    //    }
+    //    currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
 
+    //    if (currentHealth <= 0)
+    //    {
+    //        Die();
+    //    }
+    //}
+    //IEnumerator FastChangeHealth(int amount)
+    //{
+    //    float elapsedTime = 0;
+    //    while (elapsedTime < damageByFire) 
+    //    {
+    //        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+    //        elapsedTime += Time.fixedDeltaTime;
+    //        yield return new WaitForFixedUpdate();
+    //    }
         
 
-        if (amount < 0)
-        {
-            if (isInvincible)
-                return;
-
-            isInvincible = true;
-            invincibleTimer = timeInvincible;
-        }
-        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-    IEnumerator FastChangeHealth(int amount)
-    {
-        float elapsedTime = 0;
-        while (elapsedTime < damageByFire) 
-        {
-            currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-            elapsedTime += Time.fixedDeltaTime;
-            yield return new WaitForFixedUpdate();
-        }
-        
-
-    }
-    private void Die()
-    {
-        Debug.Log("Player has died.");
-        // Add death logic here
-    }
+    //}
+    //private void Die()
+    //{
+    //    Debug.Log("Player has died.");
+    //}
     void Launch()
     {
         GameObject projectileObject = Instantiate(projectilePrefab, rb.position + Vector2.up * 0.5f, Quaternion.identity);
@@ -174,13 +161,13 @@ public class PlayerController : MonoBehaviour
 
 
     }
-    void FindBook()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(rb.position, movement, 1.5f, LayerMask.GetMask("Book"));
-        if (hit.collider != null)
-        {
-            Debug.Log("Raycast has hit the object " + hit.collider.gameObject);
-            canDash = true;
-        }
-    }
+    //void FindBook()
+    //{
+    //    RaycastHit2D hit = Physics2D.Raycast(rb.position, movement, 1.5f, LayerMask.GetMask("Book"));
+    //    if (hit.collider != null)
+    //    {
+    //        Debug.Log("Raycast has hit the object " + hit.collider.gameObject);
+    //        canDash = true;
+    //    }
+    //}
 }

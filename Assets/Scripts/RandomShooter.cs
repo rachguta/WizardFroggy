@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class RandomShooter : MonoBehaviour
 {
-    public GameObject projectilePrefab; // Префаб снаряда
-    public Transform shootPoint; // Точка выстрела
-    public float shootInterval = 1f; // Интервал между выстрелами
-    public float projectileForce = 5f; // Сила выстрела
-    public float shooterDuration = 10f; // Время работы
+    [SerializeField] private GameObject projectilePrefab; // Префаб снаряда
+    [SerializeField] private Transform shootPoint; // Точка выстрела
+    [SerializeField] private float shootInterval = 1f; // Интервал между выстрелами
+    [SerializeField] private float projectileForce = 5f; // Сила выстрела
+    [SerializeField] private float shooterDuration = 15f; // Время работы
 
     private bool isShooting = true;
     [SerializeField]private bool onlyBulBul;
@@ -56,5 +56,7 @@ public class RandomShooter : MonoBehaviour
         yield return new WaitForSeconds(duration);
         isShooting = false; // Останавливаем цикл стрельбы
         Debug.Log(" RandomShooter остановился!");
+        yield return new WaitForSeconds(3);
+        isShooting = true;
     }
 }

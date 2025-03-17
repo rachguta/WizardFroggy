@@ -7,38 +7,28 @@ using UnityEngine.WSA;
 public class WindEffect : MonoBehaviour
 {
     [SerializeField]
-    private float windForce = 10000f; // Сила ветра
+    private float windForce = 10000f; 
     [SerializeField]
-    private float windDuration = 20f; // Длительность действия ветра в секундах
+    private float windDuration = 20f; 
 
     [SerializeField] private Rigidbody2D rb;
     private bool isWindActive;
 
-    private readonly Vector2[] windDirections = { Vector2.down, Vector2.left, Vector2.right }; // Последовательность направлений
-    private int currentDirectionIndex = 0; // Текущий индекс направления
+    private readonly Vector2[] windDirections = { Vector2.down, Vector2.left, Vector2.right, Vector2.up }; 
+    private int currentDirectionIndex = 0; 
 
-    private float directionChangeInterval = 5f; // Интервал смены направления в секундах
-
-    
-    [SerializeField] private bool windCanBlow;
-   
-
-    //void Start()
-    //{
-        
-
-    //    if (rb == null)
-    //    {
-    //        Debug.LogError("Rigidbody2D не установлен для WindEffect. Укажите цель в инспекторе.");
-    //        return;
-    //    }
-    //}
-
+    private float directionChangeInterval = 5f; 
+    private bool windCanBlow;
+    [SerializeField] private bool onlyChmops;
+    private void Start()
+    {
+        if (onlyChmops) StartCoroutine(ApplyWind());
+    }
     private IEnumerator ApplyWind()
     {
         isWindActive = true;
         float elapsedTime = 0f;
-
+        currentDirectionIndex = Random.Range(0, windDirections.Length);
         while (elapsedTime < windDuration)
         {
             Vector2 currentDirection = windDirections[currentDirectionIndex];
@@ -51,7 +41,14 @@ public class WindEffect : MonoBehaviour
             if (elapsedTime % directionChangeInterval < Time.fixedDeltaTime)
             {
                 // Переходим к следующему направлению
-                currentDirectionIndex = (currentDirectionIndex + 1) % windDirections.Length;
+                int newIndex = 0;
+                do
+                {
+                    newIndex = Random.Range(0, windDirections.Length);
+                }
+                while (newIndex == currentDirectionIndex);
+
+                currentDirectionIndex = newIndex;
             }
 
             yield return new WaitForFixedUpdate(); // Ждём следующее обновление
