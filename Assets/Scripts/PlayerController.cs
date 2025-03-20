@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.WSA;
-
+using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float dashDistance = 2f;
     public float dashCooldown = 0.1f;
 
+    private PlayerInputActions playerInputActions;
     private Vector2 movement;
     private Rigidbody2D rb;
     private bool isDashing = false;
@@ -36,17 +37,37 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Player.Enable();
+        playerInputActions.Player.Powers.performed += Powers;
+        playerInputActions.Player.Teleport.performed += Teleport;
+
     }
 
-    void Update()
-    {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetKeyDown(KeyCode.Space) && canDash)
+    private void Powers(InputAction.CallbackContext context)
+    {
+        if(canShoot && !isDashing)
+        {
+            Launch();
+        }
+    }
+
+    private void Teleport(InputAction.CallbackContext context)
+    {
+        if(canDash)
         {
             StartCoroutine(Dash());
         }
+    }
+    void Update()
+    {
+        movement = playerInputActions.Player.Move.ReadValue<Vector2>();
+
+        //if (Input.GetKeyDown(KeyCode.Space) && canDash)
+        //{
+        //    StartCoroutine(Dash());
+        //}
 
         if (isInvincible)
         {
@@ -57,23 +78,24 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.C) && canShoot && !isDashing)
-        {
-            Launch();
-        }
-
-        //if(Input.GetKeyDown(KeyCode.X))
+        //if (GameInput.Action.GetPowerAction() && canShoot && !isDashing)
         //{
-        //    FindBook();
+        //    Launch();
         //}
 
     }
+    //public void Shooting() 
+    //{
+    //   if(canShoot && !isDashing)
+    //    {
+    //        Launch();
+    //    }
+    //}
 
     void FixedUpdate()
     {
         if (!isDashing)
         {
-            // Apply movement
             rb.velocity = movement.normalized * moveSpeed;
 
         }
@@ -119,41 +141,8 @@ public class PlayerController : MonoBehaviour
         canDash = true;
     }
 
-    //Õ≈ ¿ “”¿À‹ÕŒ
-    //public void ChangeHealth(int amount)
-    //{
-    //    if (amount < 0)
-    //    {
-    //        if (isInvincible)
-    //            return;
-
-    //        isInvincible = true;
-    //        invincibleTimer = timeInvincible;
-    //    }
-    //    currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-
-    //    if (currentHealth <= 0)
-    //    {
-    //        Die();
-    //    }
-    //}
-    //IEnumerator FastChangeHealth(int amount)
-    //{
-    //    float elapsedTime = 0;
-    //    while (elapsedTime < damageByFire) 
-    //    {
-    //        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-    //        elapsedTime += Time.fixedDeltaTime;
-    //        yield return new WaitForFixedUpdate();
-    //    }
-        
-
-    //}
-    //private void Die()
-    //{
-    //    Debug.Log("Player has died.");
-    //}
-    void Launch()
+    
+    private void  Launch()
     {
         GameObject projectileObject = Instantiate(projectilePrefab, rb.position + Vector2.up * 0.5f, Quaternion.identity);
         Projectile projectile = projectileObject.GetComponent<Projectile>();
@@ -161,13 +150,4 @@ public class PlayerController : MonoBehaviour
 
 
     }
-    //void FindBook()
-    //{
-    //    RaycastHit2D hit = Physics2D.Raycast(rb.position, movement, 1.5f, LayerMask.GetMask("Book"));
-    //    if (hit.collider != null)
-    //    {
-    //        Debug.Log("Raycast has hit the object " + hit.collider.gameObject);
-    //        canDash = true;
-    //    }
-    //}
 }
