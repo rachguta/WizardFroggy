@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Parry : MonoBehaviour
 {
@@ -10,13 +11,20 @@ public class Parry : MonoBehaviour
     private const string PARRY = "Parry";
     private bool isParrying = false;
     public bool canParry;
-    private void Update()
+    public void StartParry(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.L) && !isParrying && canParry)
+        if (!isParrying && canParry)
         {
             StartCoroutine(PerformParry());
         }
     }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.L) && !isParrying && canParry)
+    //    {
+    //        StartCoroutine(PerformParry());
+    //    }
+    //}
 
     private IEnumerator PerformParry()
     {

@@ -36,11 +36,13 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Parry parry = GetComponentInChildren<Parry>();
         currentHealth = maxHealth;
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
         playerInputActions.Player.Powers.performed += Powers;
         playerInputActions.Player.Teleport.performed += Teleport;
+        playerInputActions.Player.Parry.performed += parry.StartParry;
 
     }
 
