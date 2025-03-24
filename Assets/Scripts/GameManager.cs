@@ -1,11 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private bool startGame;
+    private bool isPaused;
+    private PlayerInputActions playerInputActions;
+    private bool isCooldownActive = false;
+    private float resumeTime = 0f; 
+    void Start()
+    {
+        if (startGame) StartCoroutine(GameFlow());
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.GameManagment.Enable();
+        playerInputActions.GameManagment.Pause.performed += TogglePause;
+    }
+
+    private void Update()
+    {
+        if (isCooldownActive && Time.unscaledTime >= resumeTime)
+        {
+            ResumeGame();
+        }
+    }
     public enum GameState
     {
         BossStage1,
@@ -27,10 +48,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent OnLearnAbilities3;
 
 
-    void Start()
-    {
-        if(startGame) StartCoroutine(GameFlow());
-    }
+    
 
     private IEnumerator GameFlow()
     {
@@ -105,5 +123,32 @@ public class GameManager : MonoBehaviour
                 OnLearnAbilities3?.Invoke();
                 break;
         }
+    }
+    public void TogglePause(InputAction.CallbackContext context)
+    {
+        if (isPaused)
+        {
+            isCooldownActive = true;
+            resumeTime = Time.unscaledTime + 1f; 
+            Debug.Log("Ожидание перед продолжением...");
+        }
+        else
+        {
+            Time.timeScale = 0f; 
+            isPaused = true;
+            Debug.Log("Игра на паузе!");
+        }
+    }
+    private void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        isPaused = false;
+        isCooldownActive = false;
+        Debug.Log("Игра продолжается!");
+    }
+    public void GameOver()
+    {
+        Debug.Log("Game Over!!!");
+        Time.timeScale = 0f;
     }
 }

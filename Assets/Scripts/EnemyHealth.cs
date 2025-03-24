@@ -6,10 +6,11 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] float maxHealth = 100f;
     private float currentHealth;
-    // Start is called before the first frame update
+    private GameManager gameManager;
     void Start()
     {
         currentHealth = maxHealth;
+        gameManager = FindObjectOfType<GameManager>();
     }
     public void TakeDamage(float damage)
     {
@@ -23,10 +24,9 @@ public class EnemyHealth : MonoBehaviour
     }
     private void Die()
     {
-        Debug.Log(" Цербер погиб!");
+        gameManager.GameOver();
         GameObject.Destroy(gameObject);
 
-        // Здесь можно добавить анимацию смерти
     }
     public float health { get { return currentHealth; } }
 

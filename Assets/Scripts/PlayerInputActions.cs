@@ -229,6 +229,45 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""GameManagment"",
+            ""id"": ""3141f676-f13a-4c13-b2de-34f36f38dbd8"",
+            ""actions"": [
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""da0197b1-f9c3-41c6-9228-f91f7ee75591"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""799be8cb-cac4-4c5c-8f89-19e9b1cb52dd"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d6541a51-edec-4b0b-a225-dc1836bba6f1"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -263,6 +302,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Teleport = m_Player.FindAction("Teleport", throwIfNotFound: true);
         m_Player_Parry = m_Player.FindAction("Parry", throwIfNotFound: true);
         m_Player_Interaction = m_Player.FindAction("Interaction", throwIfNotFound: true);
+        // GameManagment
+        m_GameManagment = asset.FindActionMap("GameManagment", throwIfNotFound: true);
+        m_GameManagment_Pause = m_GameManagment.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -398,6 +440,52 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // GameManagment
+    private readonly InputActionMap m_GameManagment;
+    private List<IGameManagmentActions> m_GameManagmentActionsCallbackInterfaces = new List<IGameManagmentActions>();
+    private readonly InputAction m_GameManagment_Pause;
+    public struct GameManagmentActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public GameManagmentActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pause => m_Wrapper.m_GameManagment_Pause;
+        public InputActionMap Get() { return m_Wrapper.m_GameManagment; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GameManagmentActions set) { return set.Get(); }
+        public void AddCallbacks(IGameManagmentActions instance)
+        {
+            if (instance == null || m_Wrapper.m_GameManagmentActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GameManagmentActionsCallbackInterfaces.Add(instance);
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
+        }
+
+        private void UnregisterCallbacks(IGameManagmentActions instance)
+        {
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
+        }
+
+        public void RemoveCallbacks(IGameManagmentActions instance)
+        {
+            if (m_Wrapper.m_GameManagmentActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGameManagmentActions instance)
+        {
+            foreach (var item in m_Wrapper.m_GameManagmentActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_GameManagmentActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public GameManagmentActions @GameManagment => new GameManagmentActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -423,5 +511,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnTeleport(InputAction.CallbackContext context);
         void OnParry(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
+    }
+    public interface IGameManagmentActions
+    {
+        void OnPause(InputAction.CallbackContext context);
     }
 }

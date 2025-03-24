@@ -48,9 +48,13 @@ public class Projectile : MonoBehaviour
         if (!isReflected && isEnemyProjectile)
         {
             isReflected = true;
-            rigidbody2d.velocity = -rigidbody2d.velocity; // Меняем направление снаряда
+            rigidbody2d.velocity = -rigidbody2d.velocity;
             Debug.Log(" Снаряд отражён!");
         }
+    }
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject); 
     }
 
 

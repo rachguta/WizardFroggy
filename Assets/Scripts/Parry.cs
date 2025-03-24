@@ -18,13 +18,7 @@ public class Parry : MonoBehaviour
             StartCoroutine(PerformParry());
         }
     }
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.L) && !isParrying && canParry)
-    //    {
-    //        StartCoroutine(PerformParry());
-    //    }
-    //}
+    
 
     private IEnumerator PerformParry()
     {
