@@ -10,10 +10,12 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float dashDistance = 2f;
     public float dashCooldown = 0.1f;
-
-    
     private Vector2 movement;
     private Rigidbody2D rb;
+    private float minSpeed = 0.1f;
+    private bool isRunning = false;
+    
+    //Dash
     private bool isDashing = false;
     public bool canDash;
 
@@ -42,10 +44,16 @@ public class PlayerController : MonoBehaviour
     //Fire
     private float damageByFire = 3f;
     Vector2 moveDirection = new Vector2(0, 1);
+
+    //Animations
+    private Animator animator;
+    private const string IS_RUNNING = "Is Running";
+    private const string TELEPORT = "Teleport";
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         parry = GetComponentInChildren<Parry>();
+        animator = GetComponent<Animator>();
         currentHealth = maxHealth;
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
@@ -66,8 +74,10 @@ public class PlayerController : MonoBehaviour
 
     private void Teleport(InputAction.CallbackContext context)
     {
+
         if(canDash)
         {
+            
             StartCoroutine(Dash());
         }
     }
@@ -123,7 +133,14 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         movement = playerInputActions.Player.Move.ReadValue<Vector2>();
-
+        if(Mathf.Abs(movement.x) > minSpeed || Mathf.Abs(movement.y) > minSpeed)
+        {
+            isRunning = true;
+        }
+        else
+        {
+            isRunning = false;
+        }
         if (isInvincible)
         {
             invincibleTimer -= Time.deltaTime;
@@ -132,6 +149,8 @@ public class PlayerController : MonoBehaviour
                 isInvincible = false;
             }
         }
+        animator.SetBool(IS_RUNNING, isRunning);
+       
 
        
     }
@@ -152,7 +171,7 @@ public class PlayerController : MonoBehaviour
         canDash = false;
         isInvincible = true;
         invincibleTimer = timeInvincible;
-
+        animator.SetBool(TELEPORT, true);
         Vector2 dashDirection = movement != Vector2.zero ? movement.normalized : Vector2.up;
         Vector2 startPosition = rb.position;
         Vector2 targetPosition = startPosition + dashDirection * dashDistance;
@@ -163,13 +182,13 @@ public class PlayerController : MonoBehaviour
 
         Debug.DrawLine(startPosition, targetPosition, Color.red, 1.0f);
 
-        if (hit.collider != null)
+        if (hit.collider != null )
         {
             targetPosition = hit.point - dashDirection * 0.1f; 
             Debug.Log("Obstacle detected: " + hit.collider.name);
         }
 
-        float dashTime = 0.2f; 
+        float dashTime = 0.3f; 
         float elapsedTime = 0f;
 
         while (elapsedTime < dashTime)
@@ -181,6 +200,7 @@ public class PlayerController : MonoBehaviour
 
         rb.position = targetPosition;
         isDashing = false;
+        animator.SetBool(TELEPORT, false);
 
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
