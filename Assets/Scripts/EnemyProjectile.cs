@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
-    public float damage = 10f; // Урон снаряда
+    [SerializeField] private float damage = 10f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Проверяем, есть ли у объекта компонент PlayerHealth
         PlayerHealth player = collision.GetComponent<PlayerHealth>();
         if (player != null)
         {
-            player.TakeDamage(damage); // Наносим урон игроку
+            player.TakeDamage(damage);
         }
 
-        // Уничтожаем снаряд при любом столкновении
+        
+        Destroy(gameObject);
+    }
+    private void OnBecameInvisible()
+    {
         Destroy(gameObject);
     }
 }

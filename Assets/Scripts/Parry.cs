@@ -1,47 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Parry : MonoBehaviour
 {
-    public float parryRadius = 2f; // Радиус парирования (180 градусов вверх)
-    public float parryDuration = 0.2f; // Длительность парирования
+    public float parryRadius = 2f; 
+    public float parryDuration = 0.25f; 
     public Animator animator;
     private const string PARRY = "Parry";
     private bool isParrying = false;
     public bool canParry;
-    private void Update()
+    public void StartParry(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.L) && !isParrying && canParry)
+        if (!isParrying && canParry)
         {
             StartCoroutine(PerformParry());
         }
     }
+    
 
     private IEnumerator PerformParry()
     {
-        if (animator != null)
-        {
-            animator.SetTrigger(PARRY);
-        }
+        
         isParrying = true;
         Debug.Log("Парирование активировано!");
 
-        // Проверяем все объекты в радиусе 2D-круга
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, parryRadius);
         foreach (Collider2D col in colliders)
         {
             Projectile projectile = col.GetComponent<Projectile>();
             if (projectile != null)
             {
-                projectile.Reflect(); // Отбиваем снаряд
+                projectile.Reflect(); 
             }
         }
+        animator.SetTrigger(PARRY);
 
         yield return new WaitForSeconds(parryDuration);
         if (animator != null)
         {
-            animator.ResetTrigger("parry");
+            animator.ResetTrigger(PARRY);
         }
         isParrying = false;
         Debug.Log(" Парирование завершено.");

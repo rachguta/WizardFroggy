@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private float damageByBody = 10f;
     void OnCollisionEnter2D(Collision2D other)
     {
-        PlayerController controller = other.gameObject.GetComponent<PlayerController>();
+        PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
 
-        if (controller != null)
+        if (playerHealth != null)
         {
-            controller.ChangeHealth(-10);
+            playerHealth.TakeDamage(damageByBody);
         }
-        Debug.Log(controller.health);
+        Debug.Log(playerHealth.health);
 
         
         

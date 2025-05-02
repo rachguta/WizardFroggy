@@ -1,11 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private bool startGame;
+    private bool isPaused;
+    private PlayerInputActions playerInputActions;
+    private bool isCooldownActive = false;
+    private float resumeTime = 0f; 
+    void Start()
+    {
+        if (startGame) StartCoroutine(GameFlow());
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.GameManagment.Enable();
+        playerInputActions.GameManagment.Pause.performed += TogglePause;
+    }
+
+    private void Update()
+    {
+        if (isCooldownActive && Time.unscaledTime >= resumeTime)
+        {
+            ResumeGame();
+        }
+    }
     public enum GameState
     {
         BossStage1,
@@ -19,64 +40,57 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameState currentState = GameState.BossStage1;
 
-    public UnityEvent OnBossStage1Start;  // Событие начала первой стадии босса
-    public UnityEvent OnLearnAbilities1;  // Событие начала обучения
-    public UnityEvent OnBossStage2;    // Событие начала исследования мира
+    public UnityEvent OnBossStage1Start;  
+    public UnityEvent OnLearnAbilities1;  
+    public UnityEvent OnBossStage2;    
     public UnityEvent OnLearnAbilities2;
     public UnityEvent OnBossStage3;
     public UnityEvent OnLearnAbilities3;
 
 
-    void Start()
-    {
-        if(startGame) StartCoroutine(GameFlow());
-    }
+    
 
     private IEnumerator GameFlow()
     {
-        //Этап 1: Первая стадия босса
         SetGameState(GameState.BossStage1);
-        yield return new WaitForSeconds(21);
+        yield return new WaitForSeconds(15);
 
-        // Этап 2: Обучение способностям
         SetGameState(GameState.LearnAbilities1);
-        yield return new WaitForSeconds(10); 
+        yield return new WaitForSeconds(7); 
 
-        // Этап 3: Вторая стадия
         SetGameState(GameState.BossStage2);
-        yield return new WaitForSeconds(11f);
+        yield return new WaitForSeconds(15);
 
         SetGameState(GameState.LearnAbilities2);
-        yield return new WaitForSeconds(10); 
-        SetGameState(GameState.BossStage3);
-        yield return new WaitForSeconds(11);
-        // Исследование продолжается
-        SetGameState(GameState.LearnAbilities3);
-        yield return new WaitForSeconds(5);
-        Debug.Log("Основной этап игры");
+        yield return new WaitForSeconds(7); 
 
         SetGameState(GameState.BossStage3);
+        yield return new WaitForSeconds(15);
+
+        SetGameState(GameState.LearnAbilities3);
+        yield return new WaitForSeconds(7);
+        Debug.Log("Основной этап игры");
+
         // Основной игровой процесс: рандомное комбинирование 2 стадий
-        //StartCoroutine(BossBattleLoop());
+        StartCoroutine(BossBattleLoop());
 
     }
     private IEnumerator BossBattleLoop()
     {
         GameState[] bossStages = { GameState.BossStage1, GameState.BossStage2, GameState.BossStage3 };
 
-        while (true) //  Зацикленный игровой процесс
+        while (true) 
         {
-            // Выбираем две случайные стадии
             GameState firstStage = bossStages[Random.Range(0, bossStages.Length)];
             GameState secondStage;
             do
             {
                 secondStage = bossStages[Random.Range(0, bossStages.Length)];
             }
-            while (secondStage == firstStage); // Убеждаемся, что выбраны две разные стадии
+            while (secondStage == firstStage); 
             SetGameState(firstStage);
             SetGameState(secondStage);
-            yield return new WaitForSeconds(15);
+            yield return new WaitForSeconds(19);
         }
     }
 
@@ -109,5 +123,32 @@ public class GameManager : MonoBehaviour
                 OnLearnAbilities3?.Invoke();
                 break;
         }
+    }
+    public void TogglePause(InputAction.CallbackContext context)
+    {
+        if (isPaused)
+        {
+            isCooldownActive = true;
+            resumeTime = Time.unscaledTime + 1f; 
+            Debug.Log("Ожидание перед продолжением...");
+        }
+        else
+        {
+            Time.timeScale = 0f; 
+            isPaused = true;
+            Debug.Log("Игра на паузе!");
+        }
+    }
+    private void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        isPaused = false;
+        isCooldownActive = false;
+        Debug.Log("Игра продолжается!");
+    }
+    public void GameOver()
+    {
+        Debug.Log("Game Over!!!");
+        Time.timeScale = 0f;
     }
 }

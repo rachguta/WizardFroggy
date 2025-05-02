@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float maxHealth = 100f;
+    [SerializeField] float maxHealth = 100f;
     private float currentHealth;
-    private Coroutine burnCoroutine; // Хранит ссылку на корутину "горения"
+    private Coroutine burnCoroutine;
+    private GameManager gameManager;
 
     void Start()
     {
         currentHealth = maxHealth;
-        Debug.Log(currentHealth);
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     public void TakeDamage(float damage)
@@ -53,9 +54,10 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log(" Игрок погиб!");
-        GameObject.Destroy(gameObject);
 
-        // Здесь можно добавить анимацию смерти
+        GameObject.Destroy(gameObject);
+        gameManager.GameOver();
+
     }
+    public float health { get { return currentHealth; } }
 }

@@ -3,18 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.WSA;
-
+using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float moveSpeed = 5f;
     public float dashDistance = 2f;
     public float dashCooldown = 0.1f;
-
     private Vector2 movement;
     private Rigidbody2D rb;
+    private float minSpeed = 0.1f;
+    private bool isRunning = false;
+    
+    //Dash
     private bool isDashing = false;
     public bool canDash;
+
+    [Header("Input")]
+    private PlayerInputActions playerInputActions;
 
     [Header("Health Settings")]
     public int maxHealth = 1000;
@@ -23,34 +29,118 @@ public class PlayerController : MonoBehaviour
     private bool isInvincible = false;
     private float invincibleTimer;
 
-    //Projectile
+    [Header("Projectile Settings")]
     private float projectileForce = 1000f;
     public GameObject projectilePrefab;
     public bool canShoot;
 
+    [Header("Interaction Settings")]
+    [SerializeField] private float interactRadius = 1.5f;
+    private Book book;
+
+    //Parry
+    private Parry parry;
+
     //Fire
     private float damageByFire = 3f;
     Vector2 moveDirection = new Vector2(0, 1);
-    public int health { get { return currentHealth; } }
+
+    //Animations
+    private Animator animator;
+    private const string IS_RUNNING = "Is Running";
+    private const string TELEPORT = "Teleport";
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        parry = GetComponentInChildren<Parry>();
+        animator = GetComponent<Animator>();
         currentHealth = maxHealth;
+        playerInputActions = new PlayerInputActions();
+        playerInputActions.Player.Enable();
+        playerInputActions.Player.Powers.performed += Powers;
+        playerInputActions.Player.Teleport.performed += Teleport;
+        playerInputActions.Player.Parry.performed += parry.StartParry;
+        playerInputActions.Player.Interaction.performed += FindBook;
+    }
+
+
+    private void Powers(InputAction.CallbackContext context)
+    {
+        if(canShoot && !isDashing)
+        {
+            Launch();
+        }
+    }
+
+    private void Teleport(InputAction.CallbackContext context)
+    {
+
+        if(canDash)
+        {
+            
+            StartCoroutine(Dash());
+        }
+    }
+
+    private void FindBook(InputAction.CallbackContext context)
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, interactRadius);
+        foreach (Collider2D collider in colliders)
+        {
+            book = collider.GetComponent<Book>();
+            if (book != null)
+            {
+                break;
+            }
+        }
+        if (book != null)
+        {
+            if (book.isFirstBook)
+            {
+                canDash = true;
+                Debug.Log(" Игрок получил способности: рывок!");
+
+            }
+            else if (book.isSecondBook)
+            {
+                if (parry != null)
+                {
+                    parry.canParry = true;
+                    Debug.Log("Игрок получил способность: парирование!");
+                }
+                else
+                {
+                    Debug.LogWarning(" Parry не найден внутри Player!");
+                }
+
+            }
+            else if (book.isThirdBook)
+            {
+                canShoot = true;
+                Debug.Log(" Игрок получил способность: стрельба!");
+                Debug.Log(" Игра началась!");
+            }
+            Destroy(book.gameObject);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, interactRadius);
     }
 
     void Update()
     {
-        // Handle movement input
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-
-        // Handle dash input
-        if (Input.GetKeyDown(KeyCode.Space) && canDash)
+        movement = playerInputActions.Player.Move.ReadValue<Vector2>();
+        if(Mathf.Abs(movement.x) > minSpeed || Mathf.Abs(movement.y) > minSpeed)
         {
-            StartCoroutine(Dash());
+            isRunning = true;
         }
-
-        // Update invincibility timer
+        else
+        {
+            isRunning = false;
+        }
         if (isInvincible)
         {
             invincibleTimer -= Time.deltaTime;
@@ -59,26 +149,17 @@ public class PlayerController : MonoBehaviour
                 isInvincible = false;
             }
         }
+        animator.SetBool(IS_RUNNING, isRunning);
+       
 
-        // Projectile Launch
-        if (Input.GetKeyDown(KeyCode.C) && canShoot && !isDashing)
-        {
-            Launch();
-        }
-
-        //Взаимодействие с книгой
-        if(Input.GetKeyDown(KeyCode.X))
-        {
-            FindBook();
-        }
-
+       
     }
+    
 
     void FixedUpdate()
     {
         if (!isDashing)
         {
-            // Apply movement
             rb.velocity = movement.normalized * moveSpeed;
 
         }
@@ -90,27 +171,24 @@ public class PlayerController : MonoBehaviour
         canDash = false;
         isInvincible = true;
         invincibleTimer = timeInvincible;
-
+        animator.SetBool(TELEPORT, true);
         Vector2 dashDirection = movement != Vector2.zero ? movement.normalized : Vector2.up;
         Vector2 startPosition = rb.position;
         Vector2 targetPosition = startPosition + dashDirection * dashDistance;
 
-        // Укажите слой для проверки (все кроме слоя игрока)
-        int layerMask = ~LayerMask.GetMask("Player"); // Инвертируем слой Player, чтобы его игнорировать
+        int layerMask = ~LayerMask.GetMask("Player");
 
-        // Проверка препятствий на пути с помощью Raycast
         RaycastHit2D hit = Physics2D.Raycast(startPosition, dashDirection, dashDistance, layerMask);
 
-        // Визуализация луча для отладки
         Debug.DrawLine(startPosition, targetPosition, Color.red, 1.0f);
 
-        if (hit.collider != null)
+        if (hit.collider != null )
         {
-            targetPosition = hit.point - dashDirection * 0.1f; // Отступ, чтобы избежать "залипания" в препятствии
+            targetPosition = hit.point - dashDirection * 0.1f; 
             Debug.Log("Obstacle detected: " + hit.collider.name);
         }
 
-        float dashTime = 0.2f; // Длительность дэша
+        float dashTime = 0.3f; 
         float elapsedTime = 0f;
 
         while (elapsedTime < dashTime)
@@ -122,65 +200,19 @@ public class PlayerController : MonoBehaviour
 
         rb.position = targetPosition;
         isDashing = false;
+        animator.SetBool(TELEPORT, false);
 
-        // Ожидание кулдауна
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
 
-
-    public void ChangeHealth(int amount)
-    {
-
-        
-
-        if (amount < 0)
-        {
-            if (isInvincible)
-                return;
-
-            isInvincible = true;
-            invincibleTimer = timeInvincible;
-        }
-        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-    IEnumerator FastChangeHealth(int amount)
-    {
-        float elapsedTime = 0;
-        while (elapsedTime < damageByFire) 
-        {
-            currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-            elapsedTime += Time.fixedDeltaTime;
-            yield return new WaitForFixedUpdate();
-        }
-        
-
-    }
-    private void Die()
-    {
-        Debug.Log("Player has died.");
-        // Add death logic here
-    }
-    void Launch()
+    
+    private void  Launch()
     {
         GameObject projectileObject = Instantiate(projectilePrefab, rb.position + Vector2.up * 0.5f, Quaternion.identity);
         Projectile projectile = projectileObject.GetComponent<Projectile>();
         projectile.Launch(moveDirection, projectileForce);
 
 
-    }
-    void FindBook()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(rb.position, movement, 1.5f, LayerMask.GetMask("Book"));
-        if (hit.collider != null)
-        {
-            Debug.Log("Raycast has hit the object " + hit.collider.gameObject);
-            canDash = true;
-        }
     }
 }

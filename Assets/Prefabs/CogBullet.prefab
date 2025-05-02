@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2036346036049313228}
   - component: {fileID: 7164810443455567639}
   - component: {fileID: 4397837198157532113}
+  - component: {fileID: 3079013394472586951}
   m_Layer: 6
   m_Name: CogBullet
   m_TagString: Untagged
@@ -171,3 +172,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130f2213488358c489ede96d06caef40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnemyProjectile: 0
+  enemyProjectileDamage: 7
+  frogProjectileDamage: 1
+--- !u!95 &3079013394472586951
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8426352386332945753}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d5a801053d80fd14db9530c99ba7c1d8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
