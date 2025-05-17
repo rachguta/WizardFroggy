@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "D:\\FroggyGame\\Froggy\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|D:\\FroggyGame\\Froggy\\assets\\scripts\\parry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\parry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|D:\\FroggyGame\\Froggy\\assets\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|d:\\froggygame\\froggy\\assets\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|d:\\froggygame\\froggy\\assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|D:\\FroggyGame\\Froggy\\assets\\scripts\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|D:\\FroggyGame\\Froggy\\assets\\scripts\\playerinputactions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playerinputactions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|D:\\FroggyGame\\Froggy\\assets\\scripts\\parry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\parry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|D:\\FroggyGame\\Froggy\\assets\\scripts\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,14 +39,6 @@
       "RelativeMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|D:\\FroggyGame\\Froggy\\assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|D:\\FroggyGame\\Froggy\\assets\\scripts\\playerinputactions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playerinputactions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|D:\\FroggyGame\\Froggy\\assets\\scripts\\enemyprojectile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\enemyprojectile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -45,10 +49,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|D:\\FroggyGame\\Froggy\\assets\\scripts\\randomshooter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\randomshooter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|D:\\FroggyGame\\Froggy\\assets\\scripts\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playerhealth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E9408463-589D-F8D7-A58F-8BF26C5B65AE}|Assembly-CSharp.csproj|D:\\FroggyGame\\Froggy\\assets\\scripts\\gameinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -74,17 +74,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "PlayerController.cs",
               "DocumentMoniker": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\PlayerController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerController.cs",
-              "ToolTip": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\PlayerController.cs*",
-              "RelativeToolTip": "Assets\\Scripts\\PlayerController.cs*",
-              "ViewState": "AgIAAJUAAAAAAAAAAAAswK0AAAApAAAAAAAAAA==",
+              "ToolTip": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\PlayerController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\PlayerController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAK0AAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-02T19:24:58.768Z",
               "IsPinned": true,
@@ -92,7 +92,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "GameManager.cs",
               "DocumentMoniker": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\GameManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\GameManager.cs",
@@ -101,23 +101,12 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-15T10:37:24.209Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "StudyAbilities.cs",
-              "DocumentMoniker": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\StudyAbilities.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\StudyAbilities.cs",
-              "ToolTip": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\StudyAbilities.cs",
-              "RelativeToolTip": "Assets\\Scripts\\StudyAbilities.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T19:47:22.864Z"
             },
             {
               "$type": "Document",
@@ -133,7 +122,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "Enemy.cs",
               "DocumentMoniker": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\Enemy.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Enemy.cs",
@@ -145,7 +134,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "EnemyHealth.cs",
               "DocumentMoniker": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\EnemyHealth.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\EnemyHealth.cs",
@@ -157,7 +146,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
               "Title": "PlayerInputActions.cs",
               "DocumentMoniker": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\PlayerInputActions.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerInputActions.cs",
@@ -169,20 +158,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Parry.cs",
               "DocumentMoniker": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\Parry.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Parry.cs",
-              "ToolTip": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\Parry.cs*",
-              "RelativeToolTip": "Assets\\Scripts\\Parry.cs*",
-              "ViewState": "AgIAABgAAAAAAAAAAAAYwCsAAAApAAAAAAAAAA==",
+              "ToolTip": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\Parry.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Parry.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAzwA4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-22T18:43:58.75Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-22T18:43:58.75Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "Book.cs",
               "DocumentMoniker": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\Book.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Book.cs",
@@ -191,6 +179,30 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAxwAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-02T19:25:12.436Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PlayerHealth.cs",
+              "DocumentMoniker": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\PlayerHealth.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerHealth.cs",
+              "ToolTip": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\PlayerHealth.cs",
+              "RelativeToolTip": "Assets\\Scripts\\PlayerHealth.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADoAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T08:45:13.339Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "StudyAbilities.cs",
+              "DocumentMoniker": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\StudyAbilities.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\StudyAbilities.cs",
+              "ToolTip": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\StudyAbilities.cs",
+              "RelativeToolTip": "Assets\\Scripts\\StudyAbilities.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-26T19:47:22.864Z"
             },
             {
               "$type": "Document",
@@ -206,7 +218,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "EnemyProjectile.cs",
               "DocumentMoniker": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\EnemyProjectile.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\EnemyProjectile.cs",
@@ -230,7 +242,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "RandomShooter.cs",
               "DocumentMoniker": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\RandomShooter.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\RandomShooter.cs",
@@ -242,7 +254,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Projectile.cs",
               "DocumentMoniker": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\Projectile.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Projectile.cs",
@@ -251,18 +263,6 @@
               "ViewState": "AgIAABUAAAAAAAAAAAAYwDIAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-05T11:59:56.963Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "PlayerHealth.cs",
-              "DocumentMoniker": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\PlayerHealth.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerHealth.cs",
-              "ToolTip": "D:\\FroggyGame\\Froggy\\Assets\\Scripts\\PlayerHealth.cs",
-              "RelativeToolTip": "Assets\\Scripts\\PlayerHealth.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAQwDoAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-05T08:45:13.339Z"
             },
             {
               "$type": "Document",

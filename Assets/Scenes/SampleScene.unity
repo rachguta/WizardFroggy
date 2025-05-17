@@ -590,7 +590,7 @@ MonoBehaviour:
   - {fileID: 958033341375843986, guid: 36ea5451afed6304ba66e1c3f555117a, type: 3}
   - {fileID: 2984147155703556770, guid: 41e865ef7d99d42408f0e58bd3cb8f0b, type: 3}
   gridTransform: {fileID: 1156467702}
-  onlyChihai: 1
+  onlyChihai: 0
 --- !u!4 &239241119
 Transform:
   m_ObjectHideFlags: 0

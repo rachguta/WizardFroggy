@@ -242,6 +242,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectionButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""5c9c6922-d018-4702-b847-b3eae5ee4f25"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -264,6 +273,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""999e17a8-d076-455c-b185-fb2c158b0b5f"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SelectionButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ad58de7-3a94-47f5-8ad8-2244e897f1a2"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectionButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -305,6 +336,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // GameManagment
         m_GameManagment = asset.FindActionMap("GameManagment", throwIfNotFound: true);
         m_GameManagment_Pause = m_GameManagment.FindAction("Pause", throwIfNotFound: true);
+        m_GameManagment_SelectionButton = m_GameManagment.FindAction("SelectionButton", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -445,11 +477,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_GameManagment;
     private List<IGameManagmentActions> m_GameManagmentActionsCallbackInterfaces = new List<IGameManagmentActions>();
     private readonly InputAction m_GameManagment_Pause;
+    private readonly InputAction m_GameManagment_SelectionButton;
     public struct GameManagmentActions
     {
         private @PlayerInputActions m_Wrapper;
         public GameManagmentActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Pause => m_Wrapper.m_GameManagment_Pause;
+        public InputAction @SelectionButton => m_Wrapper.m_GameManagment_SelectionButton;
         public InputActionMap Get() { return m_Wrapper.m_GameManagment; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -462,6 +496,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @SelectionButton.started += instance.OnSelectionButton;
+            @SelectionButton.performed += instance.OnSelectionButton;
+            @SelectionButton.canceled += instance.OnSelectionButton;
         }
 
         private void UnregisterCallbacks(IGameManagmentActions instance)
@@ -469,6 +506,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @SelectionButton.started -= instance.OnSelectionButton;
+            @SelectionButton.performed -= instance.OnSelectionButton;
+            @SelectionButton.canceled -= instance.OnSelectionButton;
         }
 
         public void RemoveCallbacks(IGameManagmentActions instance)
@@ -515,5 +555,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public interface IGameManagmentActions
     {
         void OnPause(InputAction.CallbackContext context);
+        void OnSelectionButton(InputAction.CallbackContext context);
     }
 }
