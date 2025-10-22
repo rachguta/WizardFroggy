@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "Assets/Sprites/иконка.png",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Обратные ссылки для README"
+              "title": "Обратные ссылки для иконка"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "Assets/Sprites/иконка.png",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Исходящие ссылки из README"
+              "title": "Исходящие ссылки из иконка"
             }
           },
           {
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md",
+                "file": "Assets/Sprites/иконка.png",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Структура README"
+              "title": "Структура иконка"
             }
           }
         ]
@@ -171,6 +171,15 @@
   },
   "active": "6872990547b2da14",
   "lastOpenFiles": [
+    "Assets 1.md",
+    "README.md",
+    "Assets.md",
+    "Library/Artifacts/a6/a662c5bd0d68c425eebf32a376301bf2",
+    "Assets/gameInUnity.png.meta",
+    "Assets/gif.gif.meta",
+    "Temp/ADB-Refresh1adf50427fcd60543975c4c1e5d8edcb",
+    "Assets/gameInUnity.png",
+    "Assets/Sprites/иконка.png",
     "Packages/com.binarycharm.samples.ui/~UnityDirMonSyncFile~440a14926ba2c1247a491ee90a8332d3~",
     "Temp/UnityTempFile-553dcf03ba83f0b49a19b174bb601d8c",
     "Temp/UnityTempFile-bb46f806cdfc4ea4ba3b9d82b0c72c9d",
@@ -178,8 +187,6 @@
     "Temp/__Backupscenes",
     "Assets/Sprites/UI Game/End/лого текст.png",
     "Assets/Sprites/UI Game/End/титры ведьма 1.png",
-    "Assets/Sprites/иконка.png",
-    "README.md",
     "Assets/Sprites/A button.png",
     "Assets/Sprites/шипы.png",
     "Assets/Sprites/ЛЯГУХА молния.png",

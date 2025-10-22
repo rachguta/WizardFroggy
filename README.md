@@ -1,9 +1,13 @@
-![title](иконка.png)
+<p align="center">
+  <img src="Assets/Sprites/иконка.png" alt="Описание" width="600"/>
+</p>
+
 Wizard Froggy - небольшая пиксельная top-down игра, в которой вам предстоит поиграть за волшебного лягушонка, сражающегося с грозным трехголовым Цербером. Узнайте предысторию героя в коротком внутриигровом комиксе и освойте магические способности, чтобы одержать победу.
 ___
 ## Запуск игры
 1. Скачайте файл WizzardFroggy.zip
 2. Распакуйте и запустите WizzardFroggy.exe
+![gif](Assets/gif.gif)
 ## Запуск проекта Unity
 1. Клонируйте репозиторий
 ```bash
@@ -11,6 +15,7 @@ git clone https://github.com/rachguta/WizardFroggy.git
 ```
 2. Откройте папку проекта в unity (версия указана ниже)
 3. Запустите сцену Intro из папки Assets/Scenes
+![picture](Assets/gameInUnity.png)
 ## Технологии
 - Unity 2022.3.34f1
 - C#
