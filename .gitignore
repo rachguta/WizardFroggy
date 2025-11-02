@@ -14,8 +14,8 @@
 *.suo
 *.user
 *.userprefs
-*.obsidian
-*.vs
+/.obsidian/
+/.vs/
 
 # Ignore OS-specific files
 .DS_Store
